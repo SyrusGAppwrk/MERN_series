@@ -1,15 +1,9 @@
-const {MongoClient} = require('mongodb')
-const url='mongodb://localhost:27017';
-const client = new MongoClient(url);
-const database ='dbSyrus';
+const dbconnect = require("./mongodb");
 
-async function getProducts(){
-    let result = await client.connect();
-    let db =result.db(database)
-    let collection = db.collection('Product')
-    let response = await collection.find({}).toArray();
-    console.log(response)
+const main=async ()=>{
 
+    let data =await dbconnect();
+    data=await data.find().toArray();
+    console.log(data)
 }
-
-getProducts();
+main();
